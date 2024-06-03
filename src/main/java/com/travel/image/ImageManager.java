@@ -22,24 +22,30 @@ public class ImageManager
     public static void main(String[] args) throws IOException
     {
 
+	String foto = "atardecer.png";
+	// String foto = "edificios.png";
+
+	String header = "Agosto Costa Asturias";
+	String body1 = "Hotel 4* frente al mar";
+	String body2 = "cancelable por 36 €";
+	String foot = "www.exprimeviajes.com";
+
 	ImageManager imageManager = new ImageManager();
 
-	InputStream imageInputStream = ImageManager.class.getResourceAsStream("/atardecer.png");
-	// InputStream imageInputStream =
-	// ImageManager.class.getResourceAsStream("/edificios.jpg");
+	InputStream imageInputStream = ImageManager.class.getResourceAsStream("/" + foto);
 
-	ImageText headerText = new ImageText("Agosto Costa Asturias");
-	ImageText body1Text = new ImageText("Hotel 4* frente al mar");
-	ImageText body2Text = new ImageText("cancelable por 36 €");
+	ImageText headerText = new ImageText(header);
+	ImageText body1Text = new ImageText(body1);
+	ImageText body2Text = new ImageText(body2);
 
 	ImageTextConfig imageFootTextConfig = new ImageTextConfig();
 	imageFootTextConfig.setTextFont(new Font("Arial", Font.BOLD, 36));
-	ImageText footText = new ImageText("www.exprimeviajes.com", imageFootTextConfig);
+	ImageText footText = new ImageText(foot, imageFootTextConfig);
 
 	InputStream generatedImage = imageManager.generateImage(imageInputStream, headerText, body1Text, body2Text, footText, 10, 40);
 
 	// Guardar la imagen resultante
-	ImageIO.write(ImageIO.read(generatedImage), "png", new File("C:\\Proyectos\\Travel\\wrk-travel\\travel-commons\\travel-utils\\src\\main\\resources\\nuevo.png"));
+	ImageIO.write(ImageIO.read(generatedImage), "png", new File("nuevo.png"));
 
 	System.out.println("Imagen con texto superpuesto creada correctamente.");
     }
